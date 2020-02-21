@@ -1,13 +1,7 @@
 const test = require("ava")
-const theModule = require(".")
+const detectArch = require(".")
 
-test("main", (t) => {
-	t.throws(() => {
-		theModule(123)
-	}, {
-		instanceOf: TypeError,
-		message: "Expected a string, got number",
-	})
-
-	t.is(theModule("unicorns"), "unicorns & rainbows")
+test("main", async (t) => {
+	t.is(await detectArch("fixtures/vlc32.exe"), "32")
+	t.is(await detectArch("fixtures/vlc64.exe"), "64")
 })
